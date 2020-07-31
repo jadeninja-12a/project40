@@ -9,7 +9,7 @@ class Form{
 
     display(){
        
-        this.title.html("SPACE RACING GAME");
+        this.title.html("HURDLES GAME");
         this.title.position(displayWidth/2 + 250, displayHeight/2 - 400);
       
         this.input.position(displayWidth/2 + 300, 350);
@@ -25,7 +25,7 @@ class Form{
             player.update();
             player.updatePlayerCount(playerCount);
             this.greeting.html("Hey " + player.name + ". You have just entered the " );
-            this.greeting2.html("SPACE GAME");
+            this.greeting2.html("HURDLES GAME");
             this.greeting.position(displayWidth/2 + 250, 350);
             this.greeting2.position(displayWidth/2 + 250, 380);
         });
