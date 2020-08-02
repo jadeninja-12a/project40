@@ -6,6 +6,6 @@ class Hurdle{
         this.hurdle.draw();
     }
     didCrash(p){
-        return p.overlap(this.hurdle);
+        return isTouching(p, this.hurdle);
     }
 }

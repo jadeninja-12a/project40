@@ -23,7 +23,7 @@ class Form{
             playerCount ++;
             player.index = playerCount;
             player.update();
-            player.updatePlayerCount(playerCount);
+            player.updateCount(playerCount);
             this.greeting.html("Hey " + player.name + ". You have just entered the " );
             this.greeting2.html("HURDLES GAME");
             this.greeting.position(displayWidth/2 + 250, 350);
