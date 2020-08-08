@@ -27,9 +27,21 @@ class Game{
             form = new Form();
             form.display();
             runner1 = createSprite(100, 300, 10, 60);
-            runner2 = createSprite(300, 300, 10, 60);
+            runner1.addImage(player1IMG);
+            runner1.scale = 0.4;
+            runner2 = createSprite(200, 300, 10, 60);
+            runner2.addImage(player1IMG);
+            runner2.scale = 0.4;
             runner3 = createSprite(500, 300, 10, 60);
+            runner3.addImage(player3IMG);
+            runner3.scale = 0.4;
             runner4 = createSprite(700, 300, 10, 60);
+            runner4.addImage(player4IMG);
+            runner4.scale = 0.4;
+            runner1.setCollider("rectangle", 0, 30, 40, 90);
+            runner2.setCollider("rectangle", 0, 30, 40, 90);
+            runner3.setCollider("rectangle", 0, 30, 40, 90);
+            runner4.setCollider("rectangle", 0, 30, 40, 90);
             runners = [runner1, runner2, runner3, runner4]
             hurdles = [];
         }
@@ -38,12 +50,12 @@ class Game{
         
         form.hide();
         Player.getPlayersInfo();
-        // imageMode(CENTER);
-        // image(track, trackPosition, windowHeight/2, windowWidth * 20, windowHeight);
-        var invisibleLine = createSprite(camera.x, displayHeight/2 + 100, displayWidth, 1);
-        invisibleLine.visible = true;
-        var currentRunner = runners[player.index - 1];
-        currentRunner.shapeColor = "green";
+        imageMode(CENTER);
+        image(track, trackPosition, windowHeight/2, displayWidth * 22, windowHeight);
+        var invisibleLine = createSprite(camera.position.x, displayHeight/2 + 460, displayWidth, 500);
+        invisibleLine.visible = false;
+        var currentRunner = runners[player.index - 1]
+        currentRunner.debug = true;
         for(var i = 0; i <= 3; i++){
             if(i != (player.index-1)){
                 runners[i].visible = false;
@@ -60,19 +72,20 @@ class Game{
                     camera.position.x = currentRunner.x;                    
                 
                 if(keyIsDown(RIGHT_ARROW) && player.index != null){
-                    player.distance+= 25;
+                    player.distance+= 50;
                     trackPosition -= 1;
                     
                 }
                 player.playing();
                 if(keyIsDown(UP_ARROW) && player.index != null){
-                    currentRunner.velocityY = -20;
+                    currentRunner.velocityY = -10;
                 }
-                currentRunner.velocityY += 2.5;
+                currentRunner.velocityY += 1.1;
                 currentRunner.collide(invisibleLine);
                 for(var i = 0; i<=20; i++){
-                    hurdles[i] = new Hurdle(i * 200 + 1000 ,displayHeight/2 + 75);
+                    hurdles[i] = new Hurdle(i *  800 + 1000 ,displayHeight/2 + 150);
                     hurdles[i].shapeColor = "black";
+                    
                 }
                 for(var hurdle in hurdles){
                     if(hurdles[hurdle].didCrash(currentRunner)){
@@ -83,6 +96,7 @@ class Game{
                 }
                 player.update();
     }
+    invisibleLine.x = camera.position.x;
     drawSprites();
 }
     end(){
